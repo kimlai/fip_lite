@@ -5,9 +5,6 @@ if (Hls.isSupported()) {
   const hls = new Hls();
   hls.loadSource("https://stream.radiofrance.fr/fip/fip.m3u8?id=radiofrance");
   hls.attachMedia(video);
-  hls.on(Hls.Events.MANIFEST_PARSED, function() {
-    video.play();
-  });
 }
 // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
 // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
@@ -16,9 +13,6 @@ if (Hls.isSupported()) {
 // white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
 else if (video.canPlayType("application/vnd.apple.mpegurl")) {
   video.src = "https://stream.radiofrance.fr/fip/fip.m3u8?id=radiofrance";
-  video.addEventListener("loadedmetadata", function() {
-    video.play();
-  });
 }
 
 const play = document.getElementById("play");
@@ -26,14 +20,23 @@ const pause = document.getElementById("pause");
 
 play.addEventListener("click", () => {
   video.play();
-  play.classList.add("hidden");
-  pause.classList.remove("hidden");
+  pause.innerHTML = "...";
 });
 
 pause.addEventListener("click", () => {
   video.pause();
+  play.innerHTML = "...";
+});
+
+video.addEventListener("play", () => {
+  play.classList.add("hidden");
+  pause.classList.remove("hidden");
+  pause.innerHTML = "Stop";
+});
+video.addEventListener("pause", () => {
   pause.classList.add("hidden");
   play.classList.remove("hidden");
+  play.innerHTML = "Play";
 });
 
 const updateTrackInfo = track => {
