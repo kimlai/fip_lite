@@ -44,6 +44,19 @@ const updateTrackInfo = track => {
   document.querySelector(".title").innerHTML = track.title;
   document.querySelector(".artist").innerHTML = track.artist;
   document.querySelector("img").setAttribute("src", track.cover_url);
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: track.title,
+      artist: track.artist,
+      artwork: [
+        {
+          src: track.cover_url,
+          sizes: "266x266",
+          type: "image/jpeg"
+        }
+      ]
+    });
+  }
 };
 
 const socket = new Socket("/socket", {});
