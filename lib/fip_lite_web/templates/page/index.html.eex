@@ -1,20 +1,19 @@
 <article>
-  <header>
-    <span class="logo"><b>fip</b> <small>lite</small></span>
-  </header>
   <div class="article--inner flow">
     <div>
       <div class="flex">
-        <img width="266" height="266" src="<%= @now_playing.cover_url %>"></img>
+        <div class="cover">
+          <img width="266" height="266" src="<%= @now_playing.cover_url %>"></img>
+          <div class="controls">
+            <button id="play">Play</button>
+            <button id="pause" class="hidden">Stop</button>
+          </div>
+        </div>
         <div class="flow info">
           <div class="title"><%= @now_playing.title %></div>
           <div class="artist"><%= @now_playing.artist %></div>
         </div>
       </div>
-    </div>
-    <div class="controls">
-      <button id="play">Play</button>
-      <button id="pause" class="hidden">Stop</button>
     </div>
   </div>
 </article>

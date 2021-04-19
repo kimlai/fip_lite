@@ -8,11 +8,19 @@ video {
 }
 
 body {
+  padding: 1rem;
   display: grid;
   place-items: center;
 }
 
+header {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
 .logo {
+  display: inline-block;
   background: #e2007a;
   padding-top: 3rem;
   padding-right: 0.25rem;
@@ -20,11 +28,6 @@ body {
   padding-left: 0.25rem;
   color: white;
   box-shadow: 0.25rem 0.25rem 0 black;
-}
-@media (min-width: 1000px) {
-  .logo {
-    margin-left: 2rem;
-  }
 }
 small {
   font-size: 0.75rem;
@@ -47,7 +50,8 @@ main {
 }
 @media (min-width: 700px) {
   .article--inner {
-    padding: 3rem 4.5rem;
+    padding: 4rem 4.5rem;
+    padding-bottom: 4.5rem;
   }
 }
 
@@ -60,6 +64,9 @@ main {
 
 .info.flow > * + * {
   margin-top: 0.5rem;
+}
+.info {
+  padding-top: 2rem;
 }
 @media (min-width: 700px) {
   .info {
@@ -91,8 +98,27 @@ main {
   line-height: 1.15;
 }
 
+.cover {
+  position: relative;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%) translateX(-50%);
+  margin-left: 50%;
+}
+
 img {
   border: 2px solid;
+  width: 133px;
+  height: 133px;
+}
+@media (min-width: 700px) {
+  img {
+    width: 266px;
+    height: 266px;
+  }
 }
 
 .hidden {
@@ -102,6 +128,7 @@ img {
 .flex {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin: -0.5rem;
 }
 
