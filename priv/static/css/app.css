@@ -13,7 +13,6 @@ body {
 }
 
 .logo {
-  margin-left: 2rem;
   background: #e2007a;
   padding-top: 3rem;
   padding-right: 0.25rem;
@@ -21,6 +20,11 @@ body {
   padding-left: 0.25rem;
   color: white;
   box-shadow: 0.25rem 0.25rem 0 black;
+}
+@media (min-width: 1000px) {
+  .logo {
+    margin-left: 2rem;
+  }
 }
 small {
   font-size: 0.75rem;
@@ -32,25 +36,37 @@ main {
   align-self: center;
 }
 
-article {
-  border: 3px solid;
-  box-shadow: 0.5rem 0.5rem 0 black;
+@media (min-width: 1000px) {
+  article {
+    border: 3px solid;
+    box-shadow: 0.5rem 0.5rem 0 black;
+  }
 }
 .article--inner {
-  padding: 3rem 1rem;
+  padding: 2rem 1rem;
 }
 @media (min-width: 700px) {
   .article--inner {
     padding: 3rem 4.5rem;
   }
 }
+
+.flow > * + * {
+  margin-top: 0.75rem;
+}
 .flow > * + * {
   margin-top: 1.25rem;
 }
 
+.info.flow > * + * {
+  margin-top: 0.5rem;
+}
 @media (min-width: 700px) {
   .info {
     padding-top: 1rem;
+  }
+  .info.flow > * + * {
+    margin-top: 1.25rem;
   }
 }
 
@@ -61,7 +77,7 @@ article {
   line-height: 1.15;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 1000px) {
   .title {
     font-size: 2.5em;
     font-weight: bold;
@@ -86,11 +102,21 @@ img {
 .flex {
   display: flex;
   flex-wrap: wrap;
-  margin: -1rem;
+  margin: -0.5rem;
 }
 
 .flex > * {
-  margin: 1rem;
+  margin: 0.5rem;
+}
+
+@media (min-width: 1000px) {
+  .flex {
+    margin: -1rem;
+  }
+
+  .flex > * {
+    margin: 1rem;
+  }
 }
 
 button:active {
