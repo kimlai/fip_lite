@@ -5,7 +5,7 @@
   <div class="article--inner flow">
     <div>
       <div class="flex">
-        <img width=270 height=270 src="<%= @now_playing.cover_url %>"></img>
+        <img width="266" height="266" src="<%= @now_playing.cover_url %>"></img>
         <div class="flow info">
           <div class="title"><%= @now_playing.title %></div>
           <div class="artist"><%= @now_playing.artist %></div>
