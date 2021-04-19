@@ -1,0 +1,107 @@
+:root {
+  font-family: monospace;
+  font-size: 1.25rem;
+}
+
+video {
+  display: none;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.logo {
+  margin-left: 2rem;
+  background: #e2007a;
+  padding-top: 3rem;
+  padding-right: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.25rem;
+  color: white;
+  box-shadow: 0.25rem 0.25rem 0 black;
+}
+small {
+  font-size: 0.75rem;
+}
+
+main {
+  margin-top: auto;
+  margin-bottom: auto;
+  align-self: center;
+}
+
+article {
+  border: 3px solid;
+  box-shadow: 0.5rem 0.5rem 0 black;
+}
+.article--inner {
+  padding: 3rem 1rem;
+}
+@media (min-width: 700px) {
+  .article--inner {
+    padding: 3rem 4.5rem;
+  }
+}
+.flow > * + * {
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 700px) {
+  .info {
+    padding-top: 1rem;
+  }
+}
+
+.title {
+  max-width: 40rem;
+  font-size: 1.25em;
+  font-weight: bold;
+  line-height: 1.15;
+}
+
+@media (min-width: 700px) {
+  .title {
+    font-size: 2.5em;
+    font-weight: bold;
+  }
+  .artist {
+    font-size: 1.75em;
+  }
+}
+
+.artist {
+  line-height: 1.15;
+}
+
+img {
+  border: 2px solid;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -1rem;
+}
+
+.flex > * {
+  margin: 1rem;
+}
+
+button:active {
+  transform: translateY(0.25rem) translateX(0.25rem);
+  box-shadow: none;
+}
+
+button {
+  background: white;
+  border: 2px solid;
+  box-shadow: 0.25rem 0.25rem 0 black;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

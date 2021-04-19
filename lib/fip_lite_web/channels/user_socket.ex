@@ -2,7 +2,7 @@ defmodule FipLiteWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", FipLiteWeb.RoomChannel
+  channel "fip:*", FipLiteWeb.NowPlayingChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

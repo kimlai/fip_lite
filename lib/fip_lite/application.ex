@@ -12,9 +12,10 @@ defmodule FipLite.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: FipLite.PubSub},
       # Start the Endpoint (http/https)
-      FipLiteWeb.Endpoint
+      FipLiteWeb.Endpoint,
+      {Finch, name: FipLiteFinch},
       # Start a worker by calling: FipLite.Worker.start_link(arg)
-      # {FipLite.Worker, arg}
+      FipLite.NowPlaying
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
