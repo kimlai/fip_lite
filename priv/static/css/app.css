@@ -39,22 +39,6 @@ main {
   align-self: center;
 }
 
-@media (min-width: 1000px) {
-  article {
-    border: 3px solid;
-    box-shadow: 0.5rem 0.5rem 0 black;
-  }
-}
-.article--inner {
-  padding: 2rem 1rem;
-}
-@media (min-width: 700px) {
-  .article--inner {
-    padding: 4rem 4.5rem;
-    padding-bottom: 4.5rem;
-  }
-}
-
 .flow > * + * {
   margin-top: 0.75rem;
 }
