@@ -15,7 +15,7 @@ body {
 
 header {
   position: absolute;
-  top: 1rem;
+  top: 0.5rem;
   left: 1rem;
 }
 
@@ -27,7 +27,7 @@ header {
   padding-bottom: 0.25rem;
   padding-left: 0.25rem;
   color: white;
-  box-shadow: 0.25rem 0.25rem 0 black;
+  box-shadow: -0.5rem 0.5rem 0 black;
 }
 small {
   font-size: 0.75rem;
