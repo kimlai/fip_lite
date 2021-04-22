@@ -59,9 +59,17 @@ defmodule FipLite.NowPlaying do
     end
   end
 
-  defp schedule_work(seconds) when seconds <= 0, do: schedule_work(2)
-
   defp schedule_work(seconds) do
+    # sometimes we get a negative number for the next update, weird
+    seconds =
+      if seconds < 0 do
+        2
+      else
+        # most of the time fip seems to change the currently displayed
+        # track 26s early compared to the actual stream, weird too
+        seconds + 26
+      end
+
     IO.puts("Scheduling update in #{seconds} seconds")
     Process.send_after(self(), :fetch_info, 1000 * seconds)
   end
