@@ -59,13 +59,11 @@ defmodule FipLite.NowPlaying do
     end
   end
 
+  defp schedule_work(seconds) when seconds <= 0, do: schedule_work(2)
+
   defp schedule_work(seconds) do
-    if seconds > 0 do
-      IO.puts("Scheduling update in #{seconds} seconds")
-      Process.send_after(self(), :fetch_info, 1000 * seconds)
-    else
-      Process.send_after(self(), :fetch_info, 2000)
-    end
+    IO.puts("Scheduling update in #{seconds} seconds")
+    Process.send_after(self(), :fetch_info, 1000 * seconds)
   end
 
   defp do_fetch_info() do
@@ -77,7 +75,10 @@ defmodule FipLite.NowPlaying do
       IO.inspect(data)
 
       schedule_work(
-        DateTime.diff(DateTime.from_unix!(now["next_refresh"]), DateTime.now!("Etc/UTC")) + 1
+        DateTime.diff(
+          DateTime.from_unix!(now["next_refresh"]),
+          DateTime.from_unix!(now["server_time"])
+        )
       )
 
       {:ok,
