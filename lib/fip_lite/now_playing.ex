@@ -1,7 +1,7 @@
 defmodule FipLite.NowPlaying do
   use GenServer
 
-  @refresh_url "https://www.fip.fr/latest/api/graphql?operationName=Now&variables=%7B%22bannerPreset%22%3A%22266x266%22%2C%22stationId%22%3A7%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%2295ed3dd1212114e94d459439bd60390b4d6f9e37b38baf8fd9653328ceb3b86b%22%7D%7D"
+  @refresh_url "https://www.radiofrance.fr/api/v2.1/stations/fip/live/webradios/fip"
 
   # Client
 
@@ -38,6 +38,7 @@ defmodule FipLite.NowPlaying do
         {:noreply, track}
 
       :error ->
+        IO.puts("error 1")
         {:noreply, current_track}
     end
   end
@@ -59,19 +60,9 @@ defmodule FipLite.NowPlaying do
     end
   end
 
-  defp schedule_work(seconds) do
-    # sometimes we get a negative number for the next update, weird
-    seconds =
-      if seconds < 0 do
-        2
-      else
-        # most of the time fip seems to change the currently displayed
-        # track 26s early compared to the actual stream, weird too
-        seconds + 26
-      end
-
-    IO.puts("Scheduling update in #{seconds} seconds")
-    Process.send_after(self(), :fetch_info, 1000 * seconds)
+  defp schedule_work(milliseconds) do
+    IO.puts("Scheduling update in #{milliseconds / 1000} seconds")
+    Process.send_after(self(), :fetch_info, milliseconds)
   end
 
   defp do_fetch_info() do
@@ -79,25 +70,21 @@ defmodule FipLite.NowPlaying do
 
     with r <- Finch.build(:get, @refresh_url),
          {:ok, %Finch.Response{status: 200, body: body}} <- Finch.request(r, FipLiteFinch),
-         %{"data" => %{"now" => %{"playing_item" => track} = now} = data} <- Jason.decode!(body) do
+         %{"delayToRefresh" => refresh_delay, "now" => track} = data <- Jason.decode!(body) do
       IO.inspect(data)
 
-      schedule_work(
-        DateTime.diff(
-          DateTime.from_unix!(now["next_refresh"]),
-          DateTime.from_unix!(now["server_time"])
-        )
-      )
+      schedule_work(refresh_delay)
 
       {:ok,
        %{
-         title: track["subtitle"],
-         artist: track["title"],
-         cover_url: track["cover"]
+         title: track["firstLine"],
+         artist: track["secondLine"],
+         cover_url: track["cardVisual"]["webpSrc"]
        }}
     else
-      _ ->
-        schedule_work(5)
+      error ->
+        IO.inspect(error)
+        schedule_work(5000)
         :error
     end
   end

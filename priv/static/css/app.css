@@ -100,8 +100,8 @@ img {
 }
 @media (min-width: 700px) {
   img {
-    width: 266px;
-    height: 266px;
+    width: 250px;
+    height: 250px;
   }
 }
 
