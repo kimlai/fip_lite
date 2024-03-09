@@ -1,7 +1,7 @@
 defmodule FipLite.NowPlaying do
   use GenServer
 
-  @refresh_url "https://www.radiofrance.fr/api/v2.1/stations/fip/live/webradios/fip"
+  @refresh_url "https://www.radiofrance.fr/fip/api/live"
 
   # Client
 
@@ -77,9 +77,9 @@ defmodule FipLite.NowPlaying do
 
       {:ok,
        %{
-         title: track["firstLine"],
-         artist: track["secondLine"],
-         cover_url: track["cardVisual"]["webpSrc"]
+         title: track["firstLine"]["title"],
+         artist: track["secondLine"]["title"],
+         cover_url: track["visuals"]["card"]["webpSrc"]
        }}
     else
       error ->
